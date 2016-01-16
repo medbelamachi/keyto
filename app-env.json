@@ -1,0 +1,30 @@
+{
+  "local": {
+    "EnvironmentConfig": {
+      "backEndBaseUrl": "http://localhost:7916/keyToServices",
+      "defaultTimeZone": "GMT",
+      "defaultDateFormat": "DD-MM-YYYY HH:mm"
+    }
+  },
+  "dev": {
+    "EnvironmentConfig": {
+      "backEndBaseUrl": "https://api.dev.com",
+      "defaultTimeZone": "GMT",
+      "defaultDateFormat": "DD-MM-YYYY HH:mm"
+    }
+  },
+  "prod": {
+    "EnvironmentConfig": {
+      "backEndBaseUrl": "__CLE_PORTAL_WS_URL__",
+      "defaultTimeZone": "__DEFAULT_TIME_ZONE__",
+      "defaultDateFormat": "__DEFAULT_DATE_FORMAT__"
+    }
+  },
+  "sandbox": {
+    "EnvironmentConfig": {
+      "backEndBaseUrl": "http://-:8080/keyToServices",
+      "defaultTimeZone": "GMT",
+      "defaultDateFormat": "DD-MM-YYYY HH:mm"
+    }
+  }
+}
