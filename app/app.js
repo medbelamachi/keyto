@@ -14,23 +14,23 @@ config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRo
 
     $stateProvider
         .state('app', {
-            abstract:true,
+            abstract: true,
             views: {
                 'header': {
                     templateUrl: "templates/partials/header/header.html"
+                },
+                'leftSideBar': {
+                    templateUrl: "templates/partials/sidebar/left_sidebar.html"
+                },
+                'rightSideBar': {
+                    templateUrl: "templates/partials/sidebar/right_sidebar.html"
                 }
-                /*'navPanel': {
-                 templateUrl: "templates/partials/header/navigationPanel.html"
-                 },*/
             }
 
         }).state('view1', {
         parent: 'app',
         url: "/view1",
         views: {
-            /*'navPanel': {
-             templateUrl: "templates/partials/header/navigationPanel.html"
-             },*/
             'content@': {
                 templateUrl: "view1/view1.html",
                 controller: 'View1Ctrl as view1Ctrl'
@@ -41,9 +41,6 @@ config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRo
         parent: 'app',
         url: "/view2",
         views: {
-            /*'navPanel': {
-             templateUrl: "templates/partials/header/navigationPanel.html"
-             },*/
             'content@': {
                 templateUrl: "view2/view2.html",
                 controller: 'View2Ctrl as view2Ctrl'

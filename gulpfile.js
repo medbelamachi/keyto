@@ -77,7 +77,7 @@ gulp.task('bower', function () {
 gulp.task('browserSync', function() {
     browserSync({
         server: {
-            baseDir: 'app'
+            baseDir: './'
         },
     })
 });
