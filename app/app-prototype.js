@@ -7,7 +7,7 @@
         $httpBackend.whenGET(/\/*\/*\.js/).passThrough();
         $httpBackend.whenGET(/\/*\/*\.css/).passThrough();
         $httpBackend.whenGET(/\/*\/*\.html/).passThrough();
-        $httpBackend.whenGET(/style\/img\/content/).passThrough();
+        $httpBackend.whenGET(/public\/\*/).passThrough();
 
         var loadJSONSynchronously = function (method, path) {
             var request = new XMLHttpRequest();

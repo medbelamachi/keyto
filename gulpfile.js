@@ -85,10 +85,14 @@ gulp.task('browserSync', function() {
 /**
  * Watch for changes in the page
  */
-gulp.task('watch', ['browserSync'], function () {
+gulp.task('watchWithBrowserSync', ['browserSync'], function () {
     gulp.watch(config.mockPath, ['load-mock']);
     gulp.watch('app/**/*.html', browserSync.reload);
     gulp.watch('app/**/*.js', browserSync.reload);
+});
+
+gulp.task('watch', function () {
+    gulp.watch(config.mockPath, ['load-mock']);
 });
 
 /**
