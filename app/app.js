@@ -2,49 +2,68 @@
 
 // Declare app level module which depends on views, and components
 angular.module('app', [
-    'ui.router',
-    'angular.filter',
-    'app.env',
-    'app.prototype',
-    'app.version'
-]).
-config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+        'ui.router',
+        'angular.filter',
+        'app.env',
+        'app.prototype',
+        'app.version'
+    ])
+    .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/view1');
+        $urlRouterProvider.otherwise('/view1');
 
-    $stateProvider
-        .state('app', {
-            abstract: true,
+        $stateProvider
+            .state('app', {
+                abstract: true,
+                views: {
+                    'header': {
+                        templateUrl: "templates/partials/header/header.html"
+                    },
+                    'leftSideBar': {
+                        templateUrl: "templates/partials/sidebar/left_sidebar.html"
+                    },
+                    'rightSideBar': {
+                        templateUrl: "templates/partials/sidebar/right_sidebar.html"
+                    }
+                }
+
+            }).state('view1', {
+            parent: 'app',
+            url: "/view1",
             views: {
-                'header': {
-                    templateUrl: "templates/partials/header/header.html"
-                },
-                'leftSideBar': {
-                    templateUrl: "templates/partials/sidebar/left_sidebar.html"
-                },
-                'rightSideBar': {
-                    templateUrl: "templates/partials/sidebar/right_sidebar.html"
+                'content@': {
+                    templateUrl: "view1/view1.html",
+                    controller: 'View1Ctrl as view1Ctrl'
                 }
             }
 
-        }).state('view1', {
-        parent: 'app',
-        url: "/view1",
-        views: {
-            'content@': {
-                templateUrl: "view1/view1.html",
-                controller: 'View1Ctrl as view1Ctrl'
+        }).state('view2', {
+            parent: 'app',
+            url: "/view2",
+            views: {
+                'content@': {
+                    templateUrl: "view2/view2.html",
+                    controller: 'View2Ctrl as view2Ctrl'
+                }
             }
-        }
+        });
+    }])
+    .run(function ($rootScope, $state, $aaa) {
 
-    }).state('view2', {
-        parent: 'app',
-        url: "/view2",
-        views: {
-            'content@': {
-                templateUrl: "view2/view2.html",
-                controller: 'View2Ctrl as view2Ctrl'
-            }
-        }
+        //check for permits during state change
+        $rootScope
+            .$on('$stateChangeStart', $aaa._onStateChange);
+
+        //handle backend
+        //http authorization errors
+        $rootScope
+            .$on('unauthenticated', function (event, response) {
+                //broadcast authorization error
+                $rootScope
+                    .$broadcast('authorizationError', response);
+
+                //redirect user to signin
+                //state
+                $state.go("/view2");
+            });
     });
-}]);
